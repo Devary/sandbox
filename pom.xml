@@ -59,6 +59,26 @@
             <version>1.18.42</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-reactive-panache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-reactive-pg-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-rest-jackson</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -78,6 +98,17 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -139,6 +170,18 @@
                 <quarkus.package.jar.enabled>false</quarkus.package.jar.enabled>
                 <skipITs>false</skipITs>
                 <quarkus.native.enabled>true</quarkus.native.enabled>
+            </properties>
+        </profile>
+        <profile>
+            <id>local</id>
+            <properties>
+                <quarkus.datasource.db-kind.pg>postgresql</quarkus.datasource.db-kind.pg>
+                <quarkus.datasource.username.pg>postgres</quarkus.datasource.username.pg>
+                <quarkus.datasource.password.pg>postgresql</quarkus.datasource.password.pg>
+                <quarkus.datasource.reactive.url.pg>vertx-reactive:postgresql://localhost:5432/postgres</quarkus.datasource.reactive.url.pg>
+                <quarkus.datasource.reactive.max-size.pg>20</quarkus.datasource.reactive.max-size.pg>
+                <quarkus.hibernate-orm.database.generation.pg>update</quarkus.hibernate-orm.database.generation.pg>
+                <quarkus.datasource.jdbc.url.pg>jdbc:postgresql://localhost:5432/postgres</quarkus.datasource.jdbc.url.pg>
             </properties>
         </profile>
     </profiles>

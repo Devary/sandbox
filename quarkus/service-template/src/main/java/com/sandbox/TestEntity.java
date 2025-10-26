@@ -1,4 +1,12 @@
 package com.sandbox;
 
-public class TestEntity {
+import io.quarkus.hibernate.reactive.panache.PanacheEntity;
+import lombok.*;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class TestEntity extends PanacheEntity {
+    private String name;
 }
