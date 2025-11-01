@@ -15,15 +15,12 @@
 
     </properties>
 
-
-
-    <dependencies>
-
-    </dependencies>
-
     <profiles>
         <profile>
             <id>local</id>
+        </profile>
+        <profile>
+            <id>native</id>
         </profile>
     </profiles>
 </project>
