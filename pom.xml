@@ -20,6 +20,18 @@
         <quarkus.platform.version>3.28.5</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.4</surefire-plugin.version>
+        <!--Swagger properties :-->
+        <quarkus.smallrye-openapi.info-title>Name of my API</quarkus.smallrye-openapi.info-title>
+        <dev.quarkus.smallrye-openapi.info-title>Name of my API (dev)</dev.quarkus.smallrye-openapi.info-title>
+        <test.quarkus.smallrye-openapi.info-title>Name of my API (test)</test.quarkus.smallrye-openapi.info-title>
+        <quarkus.smallrye-openapi.info-version>1.0.0</quarkus.smallrye-openapi.info-version>
+        <quarkus.smallrye-openapi.info-description>Just an example service</quarkus.smallrye-openapi.info-description>
+        <quarkus.smallrye-openapi.info-terms-of-service>Terms of the service</quarkus.smallrye-openapi.info-terms-of-service>
+        <quarkus.smallrye-openapi.info-contact-email>support@devary.pro</quarkus.smallrye-openapi.info-contact-email>
+        <quarkus.smallrye-openapi.info-contact-name>Fakher Hammami</quarkus.smallrye-openapi.info-contact-name>
+        <quarkus.smallrye-openapi.info-contact-url>https://devary.pro/contact</quarkus.smallrye-openapi.info-contact-url>
+        <quarkus.smallrye-openapi.info-license-name>Apache 2.0</quarkus.smallrye-openapi.info-license-name>
+        <quarkus.smallrye-openapi.info-license-url>https://www.apache.org/licenses/LICENSE-2.0.html</quarkus.smallrye-openapi.info-license-url>
     </properties>
 
     <dependencyManagement>
