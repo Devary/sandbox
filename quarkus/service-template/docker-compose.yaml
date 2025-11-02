@@ -11,3 +11,9 @@ services:
       JAVA_DEBUG_PORT: "0.0.0.0:5005"
 ##    security_opt:
 ##      - label:disable ## for native ==> needs investigation about security issues
+    networks:
+      keyclock_net:
+
+networks:
+  keyclock_net:
+    external: true

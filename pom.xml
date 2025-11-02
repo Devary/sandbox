@@ -99,6 +99,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-swagger-ui</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-oidc</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -200,6 +204,12 @@
 
     <profiles>
 
+
+
+
+
+
+
         <profile>
             <id>local</id>
             <properties>
@@ -210,6 +220,14 @@
                 <quarkus.datasource.reactive.max-size.pg>20</quarkus.datasource.reactive.max-size.pg>
                 <quarkus.hibernate-orm.database.generation.pg>update</quarkus.hibernate-orm.database.generation.pg>
                 <quarkus.datasource.jdbc.url.pg>jdbc:postgresql://localhost:5432/postgres</quarkus.datasource.jdbc.url.pg>
+
+                <quarkus.oidc.auth-server-url>http://localhost:8999/realms/quarkus-realm</quarkus.oidc.auth-server-url>
+                <quarkus.oidc.client-id>account</quarkus.oidc.client-id>
+                <quarkus.oidc.credentials.secret>pEEJiJfKrehxtddClOdomifqeuWHQL6J</quarkus.oidc.credentials.secret>
+                <quarkus.oidc.application-type>web-app</quarkus.oidc.application-type>
+                <quarkus.http.auth.permission.authenticated.paths>/secured/*</quarkus.http.auth.permission.authenticated.paths>
+                <quarkus.http.auth.permission.authenticated.policy>authenticated</quarkus.http.auth.permission.authenticated.policy>
+                <quarkus.oidc.token.principal-claim>preferred_username</quarkus.oidc.token.principal-claim>
             </properties>
         </profile>
         <profile>

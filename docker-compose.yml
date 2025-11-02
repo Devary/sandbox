@@ -12,5 +12,10 @@ services:
       - "8999:8080"
     volumes:
       - keycloak_data:/opt/keycloak/data
+    networks:
+      keyclock_net:
+networks:
+  keyclock_net:
+    name: keyclock_net
 volumes:
   keycloak_data:
