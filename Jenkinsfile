@@ -2,44 +2,66 @@ pipeline {
     agent any
 
     tools {
-        maven 'maven'
+        maven 'Maven'
     }
 
+    //environment {
+    //    VERSION = readMavenPom().getVersion()
+    //    NAME = readMavenPom().getArtifactId()
+    //}
+
     stages {
-        stage('SCM') {
-            steps {
-                checkout scm
-            }
+
+    	stage('scm') {
+    	   steps {
+	    	    checkout scm
+    		}
+    	}
+
+        stage('compile') {
+	        steps {
+	       		sh 'mvn clean package -DskipTests'
+	        }
         }
 
-        stage('Compile') {
-            steps {
-                sh 'mvn -B -ntp clean compile'
-            }
+         stage('tests') {
+	        steps {
+
+           		sh 'mvn jacoco:prepare-agent test -P coverage'
+
+           		jacoco(
+    				execPattern: '**/target/jacoco.exec',
+    				classPattern: '**/target/classes/**',
+    				sourcePattern: '**/src/main/java/**',
+    				inclusionPattern: '**/*.class')
+	        }
         }
 
-        stage('Test with JaCoCo') {
-            steps {
-                sh 'mvn -B -ntp test jacoco:report'
-            }
+    stage('SonarQube Analysis') {
+        steps {
+        withSonarQubeEnv("sonar") {
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=runvoteqs -Dsonar.projectName='runvoteqs'"
+                }
         }
+    }
 
-        stage('SonarQube Analysis') {
-            steps {
-                sh 'mvn -B -ntp sonar:sonar'
-            }
-        }
-
-        stage('Package') {
+        stage('package') {
             when {
                 anyOf {
-                    branch 'main'
-                    branch 'develop'
+                    branch 'main'; branch 'dev'
                 }
             }
             steps {
-                sh 'mvn -B -ntp package'
+                script {
+                    sh '''
+						mkdir target/package/apps-repo
+						cp target/$NAME-$VERSION.jar target/package/apps-repo/$NAME.jar
+						cd target/package && zip -r ../$NAME-$VERSION.zip .
+                    '''
+                }
             }
         }
+
     }
+
 }
