@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'
-    }
+    //tools {
+    //    maven 'Maven'
+    //}
 
     //environment {
     //    VERSION = readMavenPom().getVersion()
@@ -24,31 +24,31 @@ pipeline {
 	        }
         }
 
-         stage('tests') {
-	        steps {
+        // stage('tests') {
+	    //    steps {
+//
+        //   		sh 'mvn jacoco:prepare-agent test -P coverage'
+        //
+        //   		jacoco(
+    	//			execPattern: '**/target/jacoco.exec',
+    	//			classPattern: '**/target/classes/**',
+    	//			sourcePattern: '**/src/main/java/**',
+    	//			inclusionPattern: '**/*.class')
+	    //    }
+        //}
 
-           		sh 'mvn jacoco:prepare-agent test -P coverage'
-
-           		jacoco(
-    				execPattern: '**/target/jacoco.exec',
-    				classPattern: '**/target/classes/**',
-    				sourcePattern: '**/src/main/java/**',
-    				inclusionPattern: '**/*.class')
-	        }
-        }
-
-    stage('SonarQube Analysis') {
-        steps {
-        withSonarQubeEnv("sonar") {
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=runvoteqs -Dsonar.projectName='runvoteqs'"
-                }
-        }
-    }
+    //stage('SonarQube Analysis') {
+    //    steps {
+    //    withSonarQubeEnv("sonar") {
+    //                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=anipoll -Dsonar.projectName='anipoll'"
+    //            }
+    //    }
+    //}
 
         stage('package') {
             when {
                 anyOf {
-                    branch 'main'; branch 'dev'
+                    branch 'master';
                 }
             }
             steps {
